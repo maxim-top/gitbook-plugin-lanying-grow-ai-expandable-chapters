@@ -8,22 +8,14 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
     // adding the trigger element to each ARTICLES parent and binding the event
     $(ARTICLES)
       .parent(CHAPTER)
-      .children('a, span')
+      .children('a')
+      .on('click', function(e) {
+        e.preventDefault();
+        toggle($(e.target).closest(CHAPTER));
+      })
       .append(
         $(TRIGGER_TEMPLATE)
-          .on('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggle($(e.target).closest(CHAPTER));
-          })
       );
-    // hacky solution to make spans be clickable when used in combination with "ungrey" plugin
-    $(CHAPTER + ' > span')
-      .on('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggle($(e.target).closest(CHAPTER));
-        });
     expand(lsItem());
     //expand current selected chapter with it's parents
     var activeChapter = $(CHAPTER + '.active');
