@@ -17,6 +17,7 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
         $(TRIGGER_TEMPLATE)
       );
     expand(lsItem());
+    collapse($(CHAPTER));
     //expand current selected chapter with it's parents
     var activeChapter = $(CHAPTER + '.active');
     expand(activeChapter);
