@@ -1,15 +1,15 @@
 {
-  "name": "gitbook-plugin-expandable-chapters-small",
+  "name": "gitbook-plugin-lanying-grow-ai-expandable-chapters",
   "description": "Expandable chapters for convenient navigation within a gitbook",
   "main": "index.js",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "engines": {
     "gitbook": ">=0.4.6"
   },
-  "homepage": "https://github.com/cocos-creator/gitbook-plugin-expandable-chapters-small",
+  "homepage": "https://github.com/maxim-top/gitbook-plugin-lanying-grow-ai-expandable-chapters",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cocos-creator/gitbook-plugin-expandable-chapters-small.git"
+    "url": "git+https://github.com/maxim-top/gitbook-plugin-lanying-grow-ai-expandable-chapters.git"
   },
   "license": "Apache 2"
 }

@@ -2,22 +2,25 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
   var TOGGLE_CLASSNAME = 'expanded',
       CHAPTER = '.chapter',
       ARTICLES = '.articles',
-      TRIGGER_TEMPLATE = '<i class="exc-trigger fa"></i>',
-      LS_NAMESPACE = 'expChapters';
+      TRIGGER_TEMPLATE = '<i class="exc-trigger fa"></i>';
   var init = function () {
     // adding the trigger element to each ARTICLES parent and binding the event
     $(ARTICLES)
       .parent(CHAPTER)
       .children('a')
-      .on('click', function(e) {
-        e.preventDefault();
-        toggle($(e.target).closest(CHAPTER));
-      })
       .append(
         $(TRIGGER_TEMPLATE)
+          .on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            var $chapter = $(e.target).closest(CHAPTER);
+            toggle($chapter);
+            if ($chapter.hasClass('expanded')) {
+              $chapter.children('a')[0].click();
+            }
+          })
       );
     expand(lsItem());
-    collapse($(CHAPTER));
     //expand current selected chapter with it's parents
     var activeChapter = $(CHAPTER + '.active');
     expand(activeChapter);
@@ -45,7 +48,7 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
     }
   }
   var lsItem = function () {
-    var map = JSON.parse(localStorage.getItem(LS_NAMESPACE)) || {}
+    var map = {} //JSON.parse(localStorage.getItem(LS_NAMESPACE)) || {}
     if (arguments.length) {
       var $chapters = arguments[0];
       $chapters.each(function (index, element) {
@@ -53,7 +56,7 @@ require(['gitbook', 'jQuery'], function(gitbook, $) {
         var value = $(this).hasClass(TOGGLE_CLASSNAME);
         map[level] = value;
       })
-      localStorage.setItem(LS_NAMESPACE, JSON.stringify(map));
+      //localStorage.setItem(LS_NAMESPACE, JSON.stringify(map));
     } else {
       return $(CHAPTER).map(function(index, element){
         if (map[$(this).data('level')]) {
